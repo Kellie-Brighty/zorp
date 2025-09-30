@@ -1,15 +1,13 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { 
-  Car, 
-  Sparkles, 
-  ShoppingCart, 
+ 
   ArrowRight, 
-  Star, 
+
   Check, 
-  MapPin, 
+
   Clock, 
-  Shield,
+
   Users,
   Zap,
   Heart
@@ -17,6 +15,8 @@ import {
 
 const SplashScreen = () => {
   const navigate = useNavigate();
+
+  // No auto-navigation - users click to proceed
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -28,26 +28,6 @@ const SplashScreen = () => {
     }
   };
 
-  const features = [
-    {
-      icon: <Car className="w-12 h-12 text-primary-red" />,
-      title: 'Smart Ride Hailing',
-      description: 'AI-powered matching for the fastest and most comfortable rides',
-      gradient: 'from-red-500 to-orange-500'
-    },
-    {
-      icon: <Sparkles className="w-12 h-12 text-primary-red" />,
-      title: 'Premium Car Wash',
-      description: 'Professional cleaning with eco-friendly products and attention to detail',
-      gradient: 'from-blue-500 to-cyan-500'
-    },
-    {
-      icon: <ShoppingCart className="w-12 h-12 text-primary-red" />,
-      title: 'Fresh Groceries',
-      description: 'Curated selection of fresh, local produce delivered to your door',
-      gradient: 'from-green-500 to-emerald-500'
-    }
-  ];
 
   const pricingPlans = [
     {
@@ -117,7 +97,7 @@ const SplashScreen = () => {
               <Button 
                 type="primary" 
                 className="btn-primary"
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/map')}
               >
                 Get Started
               </Button>
@@ -229,7 +209,7 @@ const SplashScreen = () => {
                 size="large"
                 type="primary" 
                 className="btn-primary text-lg px-8 py-4 h-auto shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/map')}
               >
                 Start Your Journey
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -554,7 +534,7 @@ const SplashScreen = () => {
                   <Button 
                     size="large"
                     className="bg-white text-primary-red hover:bg-gray-100 border-0"
-                    onClick={() => navigate('/login')}
+                    onClick={() => navigate('/map')}
                   >
                     Get Started Now
                   </Button>
@@ -612,7 +592,7 @@ const SplashScreen = () => {
                 <Button 
                   type={plan.popular ? "primary" : "default"}
                   className={`w-full ${plan.popular ? 'btn-primary' : 'border-2 border-gray-300 hover:border-primary-red'}`}
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate('/map')}
                 >
                   Choose Plan
                 </Button>
@@ -635,7 +615,7 @@ const SplashScreen = () => {
             <Button 
               size="large"
               className="bg-white text-primary-red hover:bg-gray-100 border-0 text-lg px-8 py-4 h-auto"
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/map')}
             >
               Start Free Trial
             </Button>

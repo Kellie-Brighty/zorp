@@ -3,14 +3,15 @@ import { ConfigProvider } from 'antd';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import Layout from './layouts/Layout';
 import SplashScreen from './pages/SplashScreen';
+import MapScreen from './pages/MapScreen';
 import Login from './pages/Login';
 import UserRoleSelection from './pages/UserRoleSelection';
-import Dashboard from './pages/Dashboard';
-import Ride from './pages/Ride';
-import CarWash from './pages/CarWash';
-import Groceries from './pages/Groceries';
+import BookingPreview from './pages/BookingPreview';
+import ChatScreen from './pages/ChatScreen';
+import OngoingRides from './pages/OngoingRides';
+import RiderOnboardingWizard from './pages/RiderOnboardingWizard';
+import DriverMapScreen from './pages/DriverMapScreen';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -43,16 +44,14 @@ function App() {
           <div className="min-h-screen bg-gray-50 font-open-sans">
             <Routes>
               <Route path="/" element={<SplashScreen />} />
+              <Route path="/map" element={<MapScreen />} />
+              <Route path="/booking-preview" element={<BookingPreview />} />
+              <Route path="/chat" element={<ChatScreen />} />
+              <Route path="/ongoing-rides" element={<OngoingRides />} />
               <Route path="/login" element={<Login />} />
               <Route path="/role-selection" element={<UserRoleSelection />} />
-              <Route path="/dashboard/*" element={<Layout />}>
-                <Route index element={<Dashboard />} />
-                <Route path="overview" element={<Dashboard />} />
-                <Route path="ride" element={<Ride />} />
-                <Route path="carwash" element={<CarWash />} />
-                <Route path="groceries" element={<Groceries />} />
-                {/* Add more routes here as we build them */}
-              </Route>
+              <Route path="/rider-onboarding" element={<RiderOnboardingWizard />} />
+              <Route path="/driver-map" element={<DriverMapScreen />} />
             </Routes>
           </div>
         </Router>

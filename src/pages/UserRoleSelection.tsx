@@ -38,7 +38,7 @@ const UserRoleSelection = () => {
     setUserRole(role);
     const roleName = role === 'customer' ? 'Customer' : role === 'driver' ? 'Driver' : 'Vendor';
     message.success(`Welcome as a ${roleName}!`);
-    navigate('/dashboard');
+    navigate('/map');
   };
 
   return (

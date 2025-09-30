@@ -1,5 +1,5 @@
-import { Card, Row, Col, Statistic, Button } from 'antd';
-import { Car, Sparkles, ShoppingCart, TrendingUp, Users, DollarSign } from 'lucide-react';
+import { Card, Row, Col, Button } from 'antd';
+import { Car, TrendingUp, DollarSign } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,15 +15,9 @@ const Dashboard = () => {
       color: 'bg-red-50',
     },
     {
-      title: 'Car Washes',
-      value: 8,
-      icon: <Sparkles className="w-6 h-6 text-primary-red" />,
-      color: 'bg-red-50',
-    },
-    {
-      title: 'Grocery Orders',
-      value: 15,
-      icon: <ShoppingCart className="w-6 h-6 text-primary-red" />,
+      title: 'Active Rides',
+      value: 2,
+      icon: <Car className="w-6 h-6 text-primary-red" />,
       color: 'bg-red-50',
     },
     {
@@ -32,16 +26,15 @@ const Dashboard = () => {
       icon: <DollarSign className="w-6 h-6 text-primary-red" />,
       color: 'bg-red-50',
     },
+    {
+      title: 'Rating',
+      value: '4.8★',
+      icon: <TrendingUp className="w-6 h-6 text-primary-red" />,
+      color: 'bg-red-50',
+    },
   ];
 
   const quickActions = [
-    {
-      title: 'View Overview',
-      description: 'See your complete dashboard summary',
-      icon: <TrendingUp className="w-8 h-8 text-primary-red" />,
-      action: 'View All',
-      route: '/dashboard/overview',
-    },
     {
       title: 'Book a Ride',
       description: 'Get a ride to your destination',
@@ -50,18 +43,25 @@ const Dashboard = () => {
       route: '/dashboard/ride',
     },
     {
-      title: 'Schedule Car Wash',
-      description: 'Keep your car clean and shiny',
-      icon: <Sparkles className="w-8 h-8 text-primary-red" />,
-      action: 'Schedule',
-      route: '/dashboard/carwash',
+      title: 'Ride History',
+      description: 'View your past rides and receipts',
+      icon: <TrendingUp className="w-8 h-8 text-primary-red" />,
+      action: 'View History',
+      route: '/dashboard/overview',
     },
     {
-      title: 'Order Groceries',
-      description: 'Fresh groceries delivered to you',
-      icon: <ShoppingCart className="w-8 h-8 text-primary-red" />,
-      action: 'Order Now',
-      route: '/dashboard/groceries',
+      title: 'Become a Driver',
+      description: 'Start earning by driving with Zorp',
+      icon: <Car className="w-8 h-8 text-primary-red" />,
+      action: 'Apply Now',
+      route: '/dashboard/driver-registration',
+    },
+    {
+      title: 'Profile Settings',
+      description: 'Manage your account and preferences',
+      icon: <TrendingUp className="w-8 h-8 text-primary-red" />,
+      action: 'Settings',
+      route: '/dashboard/settings',
     },
   ];
 
@@ -73,7 +73,7 @@ const Dashboard = () => {
           Welcome back, {user?.name}!
         </h1>
         <p className="text-gray-600 font-open-sans mb-2">
-          Ready to ride, wash, and shop? Here's what's happening with your account.
+          Ready to ride? Here's what's happening with your account.
         </p>
         <p className="text-sm text-primary-red font-medium">
           Dashboard Overview
@@ -152,21 +152,21 @@ const Dashboard = () => {
           </div>
           
           <div className="flex items-center p-4 bg-gray-50 rounded-lg">
-            <Sparkles className="w-5 h-5 text-primary-red mr-3" />
+            <Car className="w-5 h-5 text-primary-red mr-3" />
             <div className="flex-1">
-              <p className="font-medium text-primary-black">Car wash scheduled</p>
-              <p className="text-sm text-gray-600">Premium package for tomorrow</p>
+              <p className="font-medium text-primary-black">Ride in progress</p>
+              <p className="text-sm text-gray-600">From Home to Work</p>
             </div>
-            <span className="text-sm text-gray-500">1 day ago</span>
+            <span className="text-sm text-gray-500">Currently</span>
           </div>
           
           <div className="flex items-center p-4 bg-gray-50 rounded-lg">
-            <ShoppingCart className="w-5 h-5 text-primary-red mr-3" />
+            <Car className="w-5 h-5 text-primary-red mr-3" />
             <div className="flex-1">
-              <p className="font-medium text-primary-black">Grocery order delivered</p>
-              <p className="text-sm text-gray-600">15 items delivered to your door</p>
+              <p className="font-medium text-primary-black">Ride completed</p>
+              <p className="text-sm text-gray-600">From Airport to Downtown</p>
             </div>
-            <span className="text-sm text-gray-500">2 days ago</span>
+            <span className="text-sm text-gray-500">Yesterday</span>
           </div>
         </div>
       </div>

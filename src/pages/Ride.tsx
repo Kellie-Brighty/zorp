@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Card, Button, Row, Col, Input, Form, Select, Tag, message } from 'antd';
-import { Car, MapPin, Clock, Star, Navigation, User, Phone } from 'lucide-react';
+import { Card, Button, Row, Col, Input, Form, Tag, Modal, message } from 'antd';
+import { Car, MapPin, Clock, Star, Navigation, Phone, CreditCard, User } from 'lucide-react';
 
-const { Option } = Select;
 const { TextArea } = Input;
 
 const Ride = () => {
   const [rideStep, setRideStep] = useState(0);
   const [selectedRideType, setSelectedRideType] = useState('');
+  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+  const [rideDetails, setRideDetails] = useState<any>(null);
 
   const rideTypes = [
     {
@@ -49,7 +50,24 @@ const Ride = () => {
 
   const onFinishBooking = (values: any) => {
     console.log('Ride booking values:', values);
+    const selectedType = rideTypes.find(type => type.id === selectedRideType);
+    setRideDetails({
+      ...values,
+      rideType: selectedType,
+      estimatedFare: selectedType?.price || 0,
+      estimatedTime: selectedType?.time || '5-8 min'
+    });
     setRideStep(2);
+  };
+
+  const handlePayment = () => {
+    setPaymentModalVisible(true);
+  };
+
+  const confirmPayment = () => {
+    message.success('Payment successful! Your ride has been confirmed.');
+    setPaymentModalVisible(false);
+    setRideStep(3);
   };
 
   return (
@@ -201,8 +219,67 @@ const Ride = () => {
         </div>
       )}
 
-      {/* Step 3: Driver Assignment */}
+      {/* Step 3: Ride Confirmation */}
       {rideStep === 2 && (
+        <div className="bg-white rounded-lg p-6 shadow-sm">
+          <div className="text-center">
+            <div className="mb-6">
+              <Car className="w-16 h-16 text-primary-red mx-auto mb-4" />
+              <h2 className="text-2xl font-livvic font-semibold text-primary-black mb-2">
+                Confirm Your Ride
+              </h2>
+              <p className="text-gray-600">
+                Review your ride details and proceed to payment.
+              </p>
+            </div>
+
+            <Card className="max-w-md mx-auto mb-6">
+              <div className="space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">From:</span>
+                  <span className="font-medium">{rideDetails?.pickup}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">To:</span>
+                  <span className="font-medium">{rideDetails?.dropoff}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Ride Type:</span>
+                  <span className="font-medium">{rideDetails?.rideType?.name}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Estimated Time:</span>
+                  <span className="font-medium">{rideDetails?.estimatedTime}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Estimated Fare:</span>
+                  <span className="font-medium text-primary-red">₦{rideDetails?.estimatedFare?.toLocaleString()}</span>
+                </div>
+              </div>
+            </Card>
+
+            <div className="space-y-3">
+              <Button
+                type="primary"
+                icon={<CreditCard className="w-4 h-4" />}
+                onClick={handlePayment}
+                className="btn-primary w-full"
+              >
+                Proceed to Payment
+              </Button>
+              <Button
+                onClick={() => setRideStep(1)}
+                className="w-full"
+              >
+                Edit Details
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Step 4: Driver Assignment */}
+      {rideStep === 3 && (
         <div className="bg-white rounded-lg p-6 shadow-sm">
           <div className="text-center">
             <div className="mb-6">
@@ -237,11 +314,11 @@ const Ride = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Ride Type:</span>
-                  <span className="font-medium">Premium</span>
+                  <span className="font-medium">{rideDetails?.rideType?.name}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Fare:</span>
-                  <span className="font-medium">₦9,500</span>
+                  <span className="font-medium">₦{rideDetails?.estimatedFare?.toLocaleString()}</span>
                 </div>
               </div>
 
@@ -316,6 +393,67 @@ const Ride = () => {
           </div>
         </div>
       )}
+
+      {/* Payment Modal */}
+      <Modal
+        title="Payment"
+        open={paymentModalVisible}
+        onCancel={() => setPaymentModalVisible(false)}
+        footer={null}
+        width={400}
+      >
+        <div className="space-y-4">
+          <div className="text-center">
+            <CreditCard className="w-12 h-12 text-primary-red mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-primary-black mb-2">
+              Choose Payment Method
+            </h3>
+          </div>
+
+          <div className="space-y-3">
+            <Button
+              className="w-full h-12 flex items-center justify-center"
+              icon={<CreditCard className="w-5 h-5" />}
+            >
+              Credit/Debit Card
+            </Button>
+            <Button
+              className="w-full h-12 flex items-center justify-center"
+              icon={<User className="w-5 h-5" />}
+            >
+              Bank Transfer
+            </Button>
+            <Button
+              className="w-full h-12 flex items-center justify-center"
+            >
+              Cash Payment
+            </Button>
+          </div>
+
+          <div className="bg-gray-50 rounded-lg p-4">
+            <div className="flex justify-between text-lg font-semibold">
+              <span>Total Amount:</span>
+              <span className="text-primary-red">₦{rideDetails?.estimatedFare?.toLocaleString()}</span>
+            </div>
+          </div>
+
+          <div className="flex space-x-3">
+            <Button
+              onClick={() => setPaymentModalVisible(false)}
+              className="flex-1"
+            >
+              Cancel
+            </Button>
+            <Button
+              type="primary"
+              onClick={confirmPayment}
+              className="btn-primary flex-1"
+            >
+              Pay Now
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

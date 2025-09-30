@@ -3,14 +3,13 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Layout as AntLayout, Menu, Button, Avatar, Dropdown } from 'antd';
 import { 
   Car, 
-  Sparkles, 
-  ShoppingCart, 
+  // Sparkles, 
+  // ShoppingCart, 
   User, 
   Menu as MenuIcon,
   LogOut,
   Settings,
   Bell,
-  Wallet,
   Home
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
@@ -36,42 +35,20 @@ const Layout = () => {
       icon: <Car className="w-5 h-5" />,
       path: '/dashboard/ride',
     },
-    {
-      key: 'carwash',
-      label: 'Car Wash',
-      icon: <Sparkles className="w-5 h-5" />,
-      path: '/dashboard/carwash',
-    },
-    {
-      key: 'groceries',
-      label: 'Groceries',
-      icon: <ShoppingCart className="w-5 h-5" />,
-      path: '/dashboard/groceries',
-    },
+    // {
+    //   key: 'carwash',
+    //   label: 'Car Wash',
+    //   icon: <Sparkles className="w-5 h-5" />,
+    //   path: '/dashboard/carwash',
+    // },
+    // {
+    //   key: 'groceries',
+    //   label: 'Groceries',
+    //   icon: <ShoppingCart className="w-5 h-5" />,
+    //   path: '/dashboard/groceries',
+    // },
   ];
 
-  const sideMenuItems = [
-    {
-      key: 'dashboard',
-      label: 'Dashboard',
-      icon: <User className="w-4 h-4" />,
-    },
-    {
-      key: 'notifications',
-      label: 'Notifications',
-      icon: <Bell className="w-4 h-4" />,
-    },
-    {
-      key: 'wallet',
-      label: 'Wallet',
-      icon: <Wallet className="w-4 h-4" />,
-    },
-    {
-      key: 'settings',
-      label: 'Settings',
-      icon: <Settings className="w-4 h-4" />,
-    },
-  ];
 
   const userMenuItems = [
     {

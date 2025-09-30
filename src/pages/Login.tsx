@@ -20,7 +20,7 @@ const Login = () => {
         await signup(values.email, values.password, values.name);
         message.success('Account created successfully!');
       }
-      navigate('/role-selection');
+      navigate('/map');
     } catch (error) {
       message.error('Authentication failed. Please try again.');
     } finally {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Card, Button, Row, Col, Input, Badge, Drawer, List, InputNumber, Divider, Tag, message } from 'antd';
-import { ShoppingCart, Search, Plus, Minus, Trash2, MapPin, Clock, Star, Store, ArrowLeft } from 'lucide-react';
+import { Card, Button, Row, Col, Input, Drawer, List, Tag, message } from 'antd';
+import { ShoppingCart, Plus, Minus, Trash2, Star, ArrowLeft } from 'lucide-react';
 
 const { Search: SearchInput } = Input;
 

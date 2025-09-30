@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Card, Button, Row, Col, Form, Select, DatePicker, TimePicker, Input, Tag, Steps } from 'antd';
-import { Sparkles, Clock, MapPin, Car, Star, Calendar } from 'lucide-react';
+import { Sparkles, Clock, MapPin, Car, Star } from 'lucide-react';
 
 const { Option } = Select;
 const { TextArea } = Input;
